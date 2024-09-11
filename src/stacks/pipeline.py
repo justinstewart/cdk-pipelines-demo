@@ -51,7 +51,6 @@ class PipelineStack(cdk.Stack):
                 "/root/.local/bin/poetry install",
                 "/root/.local/bin/poetry run cdk synth",
             ],
-            primary_output_directory="cdk.out",
         )
         pipeline = CodePipeline(
             self,
