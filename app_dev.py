@@ -1,13 +1,15 @@
-from aws_cdk import App
+from aws_cdk import App, Environment
 
-from src.stacks.dev import DevStack
+from src.stacks.api import ApiStack
 
-from src.config import DEVELOPMENT_US_EAST_2
+DEVELOPMENT_US_EAST_2 = Environment(
+    account="058264246364", region="us-east-2"
+)
 
 
 def main():
     app = App()
-    DevStack(app, "DevStack", env=DEVELOPMENT_US_EAST_2)
+    ApiStack(app, "DevStack", env=DEVELOPMENT_US_EAST_2)
     app.synth()
 
 

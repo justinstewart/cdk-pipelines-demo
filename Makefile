@@ -1,6 +1,3 @@
--include .env
-export $(shell sed 's/=.*//' .env)
-
 bootstrap-dev:
 	npx cdk bootstrap --profile ${AWS_PROFILE_DEV} "aws://${AWS_ACCOUNT_ID_DEV}/${AWS_PRIMARY_REGION_DEV}"
 
@@ -21,10 +18,10 @@ install:
 	cd src/assets/api-image && poetry install
 
 deploy:
-	poetry run npx cdk deploy --profile ${AWS_PROFILE_OPERATIONS}
+	npx cdk@2.158 deploy -a "poetry run python app.py" --profile sandbox-operations
 
 deploy-dev:
-	poetry run cdk deploy --profile ${AWS_PROFILE_DEV} -a "poetry run python app_dev.py"
+	npx cdk@2.158 deploy --profile sandbox-dev -a "poetry run python app_dev.py"
 
 test:
 	cd src/assets/api-image && poetry run pytest

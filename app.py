@@ -1,26 +1,32 @@
 import aws_cdk as cdk
+from src.stacks.pipeline import PipelineStack, DeploymentEnvironment
 
-from src.config import (
-    CODESTAR_CONNECTION_ARN,
-    OPERATIONS_US_EAST_2,
-    STAGING_US_EAST_2,
-    PRODUCTION_US_EAST_2,
-)
-from src.stacks.code_pipeline import CodePipelineStack
+CODESTAR_CONNECTION_ARN = "arn:aws:codestar-connections:us-east-2:730335243348:connection/db850af0-8994-4b59-b459-cbe0e2220ce9"  # noqa
+OPERATIONS_US_EAST_2 = cdk.Environment(account="730335243348", region="us-east-2")
+STAGING_US_EAST_2 = cdk.Environment(account="654654371827", region="us-east-2")
+PRODUCTION_US_EAST_2 = cdk.Environment(account="851725358908", region="us-east-2")
 
 
 def main():
     app = cdk.App()
-    CodePipelineStack(
+    PipelineStack(
         app,
-        "CodePipeline",
+        "CodePipelineDemo",
         connection_arn=CODESTAR_CONNECTION_ARN,
-        env=OPERATIONS_US_EAST_2,
-        operations_environment=OPERATIONS_US_EAST_2,
-        staging_environment=STAGING_US_EAST_2,
-        production_environment=PRODUCTION_US_EAST_2,
         repo="justinstewart/cdk-pipelines-demo",
         branch="main",
+        deployment_envs=[
+            DeploymentEnvironment(
+                name="staging",
+                environment=STAGING_US_EAST_2
+            ),
+            DeploymentEnvironment(
+                name="production",
+                environment=PRODUCTION_US_EAST_2,
+                require_manual_approval=True
+            ),
+        ],
+        env=OPERATIONS_US_EAST_2,
     )
     app.synth()
 
