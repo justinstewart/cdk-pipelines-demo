@@ -29,6 +29,7 @@ class PipelineStack(cdk.Stack):
     The CodePipelineStack kicks off any time a change has been made
     to the AWS CDK app.
     """
+
     def __init__(
             self,
             scope: Construct,
@@ -62,7 +63,10 @@ class PipelineStack(cdk.Stack):
         for deployment_env in deployment_envs:
             stage = pipeline.add_stage(
                 ApiDeploymentStage(
-                    self, f"{deployment_env.name}-stage", env=deployment_env.environment
+                    self,
+                    f"{deployment_env.name}-stage",
+                    stage_name=f"{deployment_env.name}-deploy",
+                    env=deployment_env.environment
                 )
             )
             if deployment_env.require_manual_approval:
