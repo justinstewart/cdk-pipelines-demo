@@ -1,0 +1,5 @@
+services:
+  web:
+    build: ./src/assets/api-image
+    ports:
+      - "8000:80"
