@@ -5,7 +5,6 @@ CODESTAR_CONNECTION_ARN = "arn:aws:codestar-connections:us-east-2:730335243348:c
 OPERATIONS_US_EAST_2 = cdk.Environment(account="730335243348", region="us-east-2")
 STAGING_US_EAST_2 = cdk.Environment(account="654654371827", region="us-east-2")
 PRODUCTION_US_EAST_2 = cdk.Environment(account="851725358908", region="us-east-2")
-GENERAL_ELECTRIC_US_WEST_2 = cdk.Environment(account="123456789012", region="us-west-2")
 
 
 def main():
@@ -26,11 +25,6 @@ def main():
                 environment=PRODUCTION_US_EAST_2,
                 require_manual_approval=True
             ),
-            DeploymentEnvironment(
-                name="ge",
-                environment=GENERAL_ELECTRIC_US_WEST_2,
-                require_manual_approval=True
-            )
         ],
         env=OPERATIONS_US_EAST_2,
     )
