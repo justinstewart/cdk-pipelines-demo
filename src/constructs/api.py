@@ -30,6 +30,5 @@ class Api(Construct):
             memory_limit_mib=512,
             task_image_options={
                 "image": image,
-            },
-            assign_public_ip=True,
+            }
         )
