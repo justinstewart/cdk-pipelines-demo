@@ -23,5 +23,8 @@ deploy:
 deploy-dev:
 	npx cdk@2.158 deploy --profile sandbox-dev -a "poetry run python app_dev.py"
 
+diff-dev:
+	npx cdk@2.158 diff --profile sandbox-dev -a "poetry run python app_dev.py"
+
 test:
 	cd src/assets/api-image && poetry run pytest

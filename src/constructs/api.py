@@ -26,9 +26,9 @@ class Api(Construct):
         ecs_patterns.ApplicationLoadBalancedFargateService(
             self,
             "Service",
-            cpu=256,
-            memory_limit_mib=512,
+            cpu=512,
+            memory_limit_mib=1024,
             task_image_options={
                 "image": image,
-            }
+            },
         )
