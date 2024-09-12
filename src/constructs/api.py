@@ -31,5 +31,4 @@ class Api(Construct):
             task_image_options={
                 "image": image,
             },
-            assign_public_ip=True,
         )
